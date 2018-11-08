@@ -19,7 +19,8 @@ const game = boardgame.Game({
             players,
             lastPlayer: null,
             match: [],
-            deck: generate()
+            deck: generate(),
+            podium: []
         }
     },
     moves:{
@@ -91,10 +92,24 @@ const game = boardgame.Game({
                     G.match = []
                     G.lastPlayer = null
                 }),
+                onTurnEnd: produce((G, ctx)=>{
+                    if (G.podium.length ===ctx.numPlayers - 1){
+                        G.podium.push(ctx.currentPlayer)
+                        return ctx.events.endPhase('finish')
+                    }
+                }),
                 onTurnBegin: produce ((G, ctx)=>{
+                    // End turn if current is in poidum
+                    if(G.podium.includes(ctx.currentPlayer)){
+                        return ctx.events.endTurn()
+                    }
                     if (ctx.currentPlayer === G.lastPlayer){
                         console.log('end phase')
                         ctx.events.endPhase('round')
+                    }
+                    // if last player is in podium, assign it to current
+                    if (G.podium.includes(G.lastPlayer)){
+                        G.lastPlayer = ctx.currentPlayer
                     }
                 })
             }

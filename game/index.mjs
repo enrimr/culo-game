@@ -89,6 +89,7 @@ const game = boardgame.Game({
                 allowedMoves:['play','pass'],
                 onPhaseBegin: produce((G, ctx)=>{
                     G.match = []
+                    G.lastPlayer = null
                 }),
                 onTurnBegin: produce ((G, ctx)=>{
                     if (ctx.currentPlayer === G.lastPlayer){

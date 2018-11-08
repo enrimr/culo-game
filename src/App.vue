@@ -5,6 +5,7 @@
     </div>
     {{ ctx.phase }}
     {{ G.match }}
+    {{ G.lastPlayer }}
   </div>
 </template>
 

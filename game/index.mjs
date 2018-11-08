@@ -17,6 +17,7 @@ const game = boardgame.Game({
 
         return {
             players,
+            lastPlayer: null,
             match: [],
             deck: generate()
         }
@@ -59,6 +60,12 @@ const game = boardgame.Game({
             console.log(cards)
             console.log('ok')
 
+            G.lastPlayer = ctx.currentPlayer
+
+            ctx.events.endTurn()
+        }),
+        pass: produce((G,ctx) => {
+            if (!G.match.length) return console.log('Tienes que echar idiota')
             ctx.events.endTurn()
         })
     },
@@ -79,7 +86,14 @@ const game = boardgame.Game({
             },
             {
                 name: 'round',
-                allowedMoves:['play']
+                allowedMoves:['play','pass'],
+                onTurnBegin: produce ((G, ctx)=>{
+                    if (ctx.currentPlayer === G.lastPlayer){
+                        console.log('end phase')
+                        ctx.events.endPhase('round')
+                    }
+                    
+                })
             }
         ]
     }

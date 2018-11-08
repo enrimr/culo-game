@@ -25,6 +25,12 @@ const game = boardgame.Game({
                 name:'deal',
                 onPhaseBegin :produce((G,ctx)=>{
                     G.deck = ctx.random.Shuffle(G.deck)
+
+                    G.deck.forEach((card,i)=>{
+                        const playerId = i % ctx.numPlayers
+                        G.players[playerId].hand.push(card)
+                    })
+                    G.deck = [] // vaciamos la baraja ya que en el culo se reparten todas las cartas, si fuera un juego de robar carta, podríamos mantenerlo
                 })
             }
         ]

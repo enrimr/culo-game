@@ -6,12 +6,15 @@
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import {mapActions} from 'vuex'
+
 
 export default {
-  name: "app",
-  components: {
-    HelloWorld
+  created(){
+    this.init()
+  },
+  methods:{
+    ...mapActions('game', ['init'])
   }
 };
 </script>

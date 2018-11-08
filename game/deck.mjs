@@ -9,3 +9,8 @@ export function generate(){
             []
     )
 }
+
+export function getRankFromCards(cards){
+    const ranks = cards.map(card => RANKS.indexOf(card.slice(0,1)))
+    return ranks.every(rank => rank === ranks[0]) ? ranks[0] : null
+}

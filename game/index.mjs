@@ -1,5 +1,5 @@
 import boardgame from 'boardgame.io/core'
-import {generate} from './deck'
+import {generate, getRankFromCards} from './deck'
 import immer from 'immer'
 import _ from 'lodash'
 
@@ -32,6 +32,10 @@ const game = boardgame.Game({
                 return console.log('El usuario no tiene estas cartas')
             }
             // Que las cartas sean del mismo rank
+            const rank = getRankFromCards(cards)
+            if (!rank) {
+                return console.log('Las cartas no son del mismo rango')
+            }
             // El rango debe ser mayor que la anterior jugada, solo si no eres el primero en jugar
             // Quitar cartas de la mano
             // Guardar las cartas en match

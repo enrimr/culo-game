@@ -17,6 +17,7 @@ const game = boardgame.Game({
 
         return {
             players,
+            match: [],
             deck: generate()
         }
     },
@@ -33,12 +34,16 @@ const game = boardgame.Game({
             }
             // Que las cartas sean del mismo rank
             const rank = getRankFromCards(cards)
-            if (!rank) {
+            if (rank==null) {
                 return console.log('Las cartas no son del mismo rango')
             }
             // El rango debe ser mayor que la anterior jugada, solo si no eres el primero en jugar
             // Quitar cartas de la mano
+            player.hand = player.hand.filter(card => !cards.includes(card))
+            
             // Guardar las cartas en match
+            G.match.push(cards)
+
             console.log(cards)
             console.log('ok')
         })

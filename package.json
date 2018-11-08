@@ -5,10 +5,15 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start": "node --experimental-modules server",
+    "start:dev": "nodemon -w game -w server --exec yarn start "
   },
   "dependencies": {
-    "vue": "^2.5.17"
+    "boardgame.io": "^0.26.3",
+    "koa-static": "^5.0.0",
+    "vue": "^2.5.17",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.1.1",
@@ -18,6 +23,8 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
+    "nodemon": "^1.18.5",
+    "vue-cli-plugin-boardgame": "^1.0.6",
     "vue-template-compiler": "^2.5.17"
   }
 }

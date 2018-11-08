@@ -19,6 +19,11 @@ const game = boardgame.Game({
             deck: generate()
         }
     },
+    moves:{
+        play: produce((G,ctx,...cards)=>{
+            console.log(cards)
+        })
+    },
     flow:{
         phases: [
             {
@@ -31,7 +36,12 @@ const game = boardgame.Game({
                         G.players[playerId].hand.push(card)
                     })
                     G.deck = [] // vaciamos la baraja ya que en el culo se reparten todas las cartas, si fuera un juego de robar carta, podríamos mantenerlo
+                    ctx.events.endPhase()
                 })
+            },
+            {
+                name: 'round',
+                allowedMoves:['play']
             }
         ]
     }

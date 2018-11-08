@@ -1,16 +1,22 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
+    <div v-for="player in G.players">
+      {{ player.hand }}
+    </div>
+    {{ ctx.phase }}
   </div>
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 
 
 export default {
   created(){
     this.init()
+  },
+  computed:{
+    ...mapState('game',['G','ctx'])
   },
   methods:{
     ...mapActions('game', ['init'])

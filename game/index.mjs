@@ -1,5 +1,8 @@
 import boardgame from 'boardgame.io/core'
 import {generate} from './deck'
+import immer from 'immer'
+
+const {produce} = immer
 
 const game = boardgame.Game({
     setup: ctx => {
@@ -20,12 +23,9 @@ const game = boardgame.Game({
         phases: [
             {
                 name:'deal',
-                onPhaseBegin(G,ctx){
-                    return {
-                        ...G,
-                        deck: ctx.random.Shuffle(G.deck)
-                    }
-                }
+                onPhaseBegin :produce((G,ctx)=>{
+                    G.deck = ctx.random.Shuffle(G.deck)
+                })
             }
         ]
     }

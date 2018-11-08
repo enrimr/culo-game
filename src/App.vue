@@ -4,6 +4,7 @@
       {{ player.hand }}
     </div>
     {{ ctx.phase }}
+    {{ G.match }}
   </div>
 </template>
 

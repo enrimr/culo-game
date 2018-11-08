@@ -38,6 +38,18 @@ const game = boardgame.Game({
                 return console.log('Las cartas no son del mismo rango')
             }
             // El rango debe ser mayor que la anterior jugada, solo si no eres el primero en jugar
+            if (G.match.length){
+                const lastCards = G.match[G.match.length - 1]
+                const lastRank = getRankFromCards(lastCards)
+                if (rank <= lastRank){
+                    return console.log ('rank is not bigger than match')
+                }
+                if (lastCards.lenght !== cards.lenght){
+                    return console.log('num cards is not same as match')
+                }
+            }
+            
+            
             // Quitar cartas de la mano
             player.hand = player.hand.filter(card => !cards.includes(card))
             
@@ -46,6 +58,8 @@ const game = boardgame.Game({
 
             console.log(cards)
             console.log('ok')
+
+            ctx.events.endTurn()
         })
     },
     flow:{

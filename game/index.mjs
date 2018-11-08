@@ -87,12 +87,14 @@ const game = boardgame.Game({
             {
                 name: 'round',
                 allowedMoves:['play','pass'],
+                onPhaseBegin: produce((G, ctx)=>{
+                    G.match = []
+                }),
                 onTurnBegin: produce ((G, ctx)=>{
                     if (ctx.currentPlayer === G.lastPlayer){
                         console.log('end phase')
                         ctx.events.endPhase('round')
                     }
-                    
                 })
             }
         ]

@@ -1,6 +1,7 @@
 import boardgame from 'boardgame.io/core'
 import {generate} from './deck'
 import immer from 'immer'
+import _ from 'lodash'
 
 const {produce} = immer
 
@@ -21,7 +22,21 @@ const game = boardgame.Game({
     },
     moves:{
         play: produce((G,ctx,...cards)=>{
+            const player = G.players[ctx.currentPlayer]
+            // El número máximo de cartas a jugar el 4
+            if (cards.length<1 || cards.lenght>4){
+                return console.log('Número de cartas no está entre 1 y 4')
+            }
+            // Que el usuario tenga esas cartas
+            if(_.intersection(player.hand, cards).length !== cards.length){
+                return console.log('El usuario no tiene estas cartas')
+            }
+            // Que las cartas sean del mismo rank
+            // El rango debe ser mayor que la anterior jugada, solo si no eres el primero en jugar
+            // Quitar cartas de la mano
+            // Guardar las cartas en match
             console.log(cards)
+            console.log('ok')
         })
     },
     flow:{
